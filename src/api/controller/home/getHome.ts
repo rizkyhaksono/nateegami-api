@@ -1,6 +1,11 @@
 import { createElysia } from "@/libs/elysia";
 import * as cheerio from "cheerio";
 
+import ILatestComics from "@/types/latestComics";
+import IMirrorComics from "@/types/mirrorComics";
+import IPopularComics from "@/types/popularComics";
+import IUpdateComicData from "@/types/updateComics";
+
 export default createElysia()
   .get("/", async () => {
     const url = await fetch(`${Bun.env.BASE_URL}`);
@@ -8,7 +13,7 @@ export default createElysia()
     const $ = cheerio.load(html);
 
     // Get latest comics
-    const latestComics: any = [];
+    const latestComics: ILatestComics[] = [];
     $(".col-md-8 .col-xl-3").each((_, element) => {
       const title = $(element).find(".series-title").text().trim();
       const image = $(element).find(".thumb-img").attr("src");
@@ -30,7 +35,7 @@ export default createElysia()
     });
 
     // Get popular comics
-    const popularComics: any = [];
+    const popularComics: IPopularComics[] = [];
     $(".d-flex[style*='overflow-x:auto']").find(".col-6").each((_, element) => {
       const title = $(element).find(".series-title").text().trim();
       const image = $(element).find(".thumb-img").attr("src");
@@ -54,7 +59,7 @@ export default createElysia()
     });
 
     // Get mirror comics
-    const mirrorComics: any = [];
+    const mirrorComics: IMirrorComics[] = [];
     $(".recommendations2 .col-xl-2").each((_, element) => {
       const title = $(element).find(".series-title").text().trim();
       const image = $(element).find(".thumb-img").attr("src");
@@ -78,7 +83,29 @@ export default createElysia()
     });
 
     // Get update comics
-    const updateComics = "coming soon";
+    const updateComics: IUpdateComicData[] = [];
+    $(".feed-reaper tbody tr").each((_, element) => {
+      const type = $(element)
+        .find("th span")
+        .text()
+        .trim();
+      const series = {
+        title: $(element).find("td:nth-child(2) a").text().trim(),
+        link: $(element).find("td:nth-child(2) a").attr("href"),
+      };
+      const chapter = {
+        title: $(element).find("td:nth-child(3) a").text().trim(),
+        link: $(element).find("td:nth-child(3) a").attr("href"),
+      };
+      const date = $(element).find("td:nth-child(4)").text().trim();
+
+      updateComics.push({
+        type,
+        series,
+        chapter,
+        date,
+      });
+    });
 
     return {
       status: 200,
