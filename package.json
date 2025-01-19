@@ -1,12 +1,17 @@
 {
-  "name": "nateegami",
+  "name": "nateegami-api",
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/swagger": "^1.2.0",
+    "cheerio": "^1.0.0",
+    "elysia": "latest",
+    "logestic": "^1.2.4",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "bun-types": "latest"
