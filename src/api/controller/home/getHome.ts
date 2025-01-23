@@ -111,7 +111,7 @@ export default createElysia()
       status: 200,
       data: {
         "latestComics": latestComics,
-        "popularComis": popularComics,
+        "popularComics": popularComics,
         "mirrorComics": mirrorComics,
         "updateComics": updateComics,
       }
