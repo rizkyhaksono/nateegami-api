@@ -110,10 +110,10 @@ export default createElysia()
     return {
       status: 200,
       data: {
-        "Latest Comics": latestComics,
-        "Popular Comis": popularComics,
-        "Mirror Comics": mirrorComics,
-        "Update Comics": updateComics,
+        "latestComics": latestComics,
+        "popularComis": popularComics,
+        "mirrorComics": mirrorComics,
+        "updateComics": updateComics,
       }
     };
   }, {
