@@ -12,16 +12,8 @@ export const docs = swagger({
         description: "Nateegami Home API Documentation"
       },
       {
-        name: "Project",
-        description: "Nateegami Project API Documentation",
-      },
-      {
-        name: "Mirror",
-        description: "Nateegami Mirror API Documentation",
-      },
-      {
-        name: "Trending",
-        description: "Nateegami Trending API Documentation",
+        name: "Comic Detail",
+        description: "Nateegami Comic Detail API Documentation",
       },
     ],
   },
