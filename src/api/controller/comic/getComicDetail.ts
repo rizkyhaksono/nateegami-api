@@ -43,28 +43,19 @@ export default createElysia()
       .map((_, el) => $(el).text().trim())
       .get();
 
-    const chapters = $("li[data-num]")
-      .map((_, element) => {
-        const chapterNum = $(element).find(".chapternum").text().trim();
-        const chapterUrl = $(element).find("a").attr("href") ?? "";
-        const chapterDate = $(element).find(".chapterdate").text().trim();
+    const chapters = $(".eplister li").map((_, el) => {
+      const chapterNumber = $(el).find(".chapternum").text().trim();
+      const chapterUrl = $(el).find("a").attr("href") ?? "";
+      const chapterDate = $(el).find(".chapterdate").text().trim();
+      const chapterSlug = chapterUrl.split("/").filter(Boolean).pop() ?? "";
 
-        if (chapterNum === "Chapter {{number}}" || chapterDate === "{{date}}" || !chapterUrl) return null;
-
-        const chapterSlug = chapterUrl
-          .replace('https://kiryuu.one/', '')
-          .replace('/', '');
-
-        return {
-          number: chapterNum,
-          url: chapterUrl,
-          slug: chapterSlug,
-          date: chapterDate,
-        };
-      })
-      .get()
-      .filter(Boolean);
-
+      return {
+        number: chapterNumber,
+        url: chapterUrl,
+        slug: chapterSlug,
+        date: chapterDate,
+      };
+    }).get();
 
     return {
       status: 200,
