@@ -15,7 +15,7 @@ export default createElysia()
     const noscriptContent = $("noscript").text();
     const image = noscriptContent.match(/src="([^"]+)"/g)
       ?.map((src) => src.replace('src="', '').replace('"', ''))
-      .filter((src) => src.startsWith('https://r2.uqni.net')) ?? [];
+      .filter((src) => src.startsWith('https://r2.uqni.net') || src.startsWith('https://cdn.uqni.net')) ?? [];
 
     if (image.length === 0) {
       return {
